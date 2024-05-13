@@ -14,9 +14,9 @@ namespace Nuxt3Packager
         string WorkingDirectory { get; set; } = @"D:\code\dome"; // 设置工作目录路径
         public string? Message { get; set; } // 提示
         public string? Arguments { get; set; } // 执行命令
-        public string ModulesFolderPath { get; set; } = @"D:\code\dome\node_modules"; // 包目录
-        public string OutputFolderPath { get; set; } = @"D:\code\dome\.output"; // 打包文件目录
-        public string ZipFilePath { get; set; } = @"D:\code\dome\.output.zip"; // 打包文件目录
+        public string ModulesFolderPath { get; set; } = @".\node_modules"; // 包目录
+        public string OutputFolderPath { get; set; } = @".\.output"; // 打包文件目录
+        public string ZipFilePath { get; set; } = @".\.output.zip"; // 打包文件目录
 
         public bool Start () {
             Console.WriteLine($"{Message}:初始化...");
