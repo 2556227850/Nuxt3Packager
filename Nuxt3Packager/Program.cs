@@ -11,8 +11,8 @@ class Program
         Console.WriteLine("<=====创建Nuxt3项目打包任务=====>");
         Console.WriteLine("<=====开始任务=====>");
         // 创建指令
-        Cmd YarnPackage = new Cmd { Message = "检测yarn环境程序", Arguments = "/c yarn --version" , };
-        Cmd InstallationYarn = new Cmd() { Message = "安装yarn程序", Arguments = "/c npm i yarn -g" };
+        Cmd YarnPackage = new Cmd { Message = "检测yarn环境程序", Arguments = "/c yar --version" , };
+        Cmd InstallationYarn = new Cmd() { Message = "安装yarn程序", Arguments = "/c np i yarn -g" };
         Cmd InstallationPackage = new Cmd() { Message = "安装项目包程序", Arguments = "/c yarn" };
         Cmd RunBuild = new Cmd() { Message = "打包程序", Arguments = "/c yarn build" };
 
@@ -35,6 +35,8 @@ class Program
             {
                 Console.WriteLine($"{InstallationYarn.Message}:yarn包安装失败.程序终止.");
                 Console.WriteLine("<=====任务失败=====>");
+                Console.WriteLine("按任意键退出程序");
+                Console.ReadLine();
                 return;
             }
 
@@ -55,6 +57,8 @@ class Program
             {
                 Console.WriteLine($"{InstallationPackage.Message}:项目包安装失败.程序终止.");
                 Console.WriteLine("<=====任务失败=====>");
+                Console.WriteLine("按任意键退出程序");
+                Console.ReadLine();
                 return;
             }
             Console.WriteLine($"{InstallationPackage.Message}:项目包安装成功,准备执行打包程序...");
@@ -81,8 +85,10 @@ class Program
             if(!isRunBuild) {
                 Console.WriteLine($"{RunBuild.Message}:项目打包失败,程序终止！");
                 Console.WriteLine("<=====任务失败=====>");
-                return;
-            }
+                Console.WriteLine("按任意键退出程序");
+                Console.ReadLine();
+            return;
+        }
         // 执行压缩程序
 
         bool isZip = Zip.CreateZip(InstallationPackage.OutputFolderPath, InstallationPackage.ZipFilePath);
@@ -91,13 +97,13 @@ class Program
             {
                 Console.WriteLine($"{Zip.Message}:项目压缩失败,程序终止！");
                 Console.WriteLine("<=====任务失败=====>");
-                return;
-            }
+                Console.WriteLine("按任意键退出程序");
+                Console.ReadLine();
+            return;
+        }
 
         Console.WriteLine("<=====任务成功=====>");
-
         Console.WriteLine("按任意键退出程序");
-
         Console.ReadLine();
     }
 

@@ -11,7 +11,7 @@ namespace Nuxt3Packager
     {
 
         string FileName { get; set; } = "cmd.exe"; // 执行的命令程序
-        string WorkingDirectory { get; set; } = @"D:\code\dome"; // 设置工作目录路径
+        string WorkingDirectory { get; set; } = @".\"; // 设置工作目录路径
         public string? Message { get; set; } // 提示
         public string? Arguments { get; set; } // 执行命令
         public string ModulesFolderPath { get; set; } = @".\node_modules"; // 包目录
