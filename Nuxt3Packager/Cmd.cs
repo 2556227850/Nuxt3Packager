@@ -7,26 +7,19 @@ using System.Threading.Tasks;
 
 namespace Nuxt3Packager
 {
-    internal class Cmd
+    internal class Cmd :Log
     {
 
         string FileName { get; set; } = "cmd.exe"; // 执行的命令程序
         string WorkingDirectory { get; set; } = @"D:\code\dome"; // 设置工作目录路径
+        public string? Message { get; set; } // 提示
         public string? Arguments { get; set; } // 执行命令
         public string ModulesFolderPath { get; set; } = @"D:\code\dome\node_modules"; // 包目录
         public string OutputFolderPath { get; set; } = @"D:\code\dome\.output"; // 打包文件目录
         public string ZipFilePath { get; set; } = @"D:\code\dome\.output.zip"; // 打包文件目录
 
-        public Cmd(string message)
-        {
-            Console.WriteLine($"指令程序:{message}初始化...");
-        }
-        public Cmd()
-        {
-            Console.WriteLine($"指令程序:初始化...");
-        }
         public bool Start () {
-                Console.WriteLine($"指令程序:创建进程...");
+            Console.WriteLine($"{Message}:初始化...");
             try
             {
                 // 设置进程信息
@@ -41,6 +34,7 @@ namespace Nuxt3Packager
                     CreateNoWindow = true, // 不创建新窗口
                 };
 
+                Console.WriteLine($"{Message}:创建进程...");
                 // 创建一个新的进程
                 Process process = new Process();
                 process.StartInfo = startInfo;
@@ -48,7 +42,7 @@ namespace Nuxt3Packager
                 process.OutputDataReceived += Process_OutputDataReceived; // 添加输出数据接收事件处理程序
                 process.ErrorDataReceived += Process_ErrorDataReceived; // 添加错误数据接收事件处理程序
                                                                         // 启动进程
-                Console.WriteLine($"指令程序:开始执行=>执行指令为 {Arguments}");
+                Console.WriteLine($"{Message}:开始执行=>执行指令为 {Arguments}");
                 process.Start();
 
                 process.BeginOutputReadLine(); // 异步读取输出流
@@ -60,12 +54,12 @@ namespace Nuxt3Packager
                 // 检查命令的退出代码
                 if (process.ExitCode == 0)
                 {
-                    Console.WriteLine($"指令程序:执行成功");
+                    Console.WriteLine($"{Message}:执行成功");
                     return true;
                 }
                 else
                 {
-                    Console.WriteLine($"指令程序:执行失败");
+                    Console.WriteLine($"{Message}:执行失败");
                     return false;
                 }
 
@@ -73,25 +67,10 @@ namespace Nuxt3Packager
             catch (Exception ex)
             {
                 // 捕获异常
-                Console.WriteLine("指令程序:执行出错=>: " + ex.Message);
+                Console.WriteLine($"{Message}:执行出错=>: {ex.Message}");
                 return false;
             }
         }
-        // 输出数据接收事件处理程序
-        private static void Process_OutputDataReceived(object sender, DataReceivedEventArgs e)
-        {
-            if (!string.IsNullOrEmpty(e.Data))
-            {
-                Console.WriteLine("命令执行日志: " + e.Data);
-            }
-        }
-        // 错误数据接收事件处理程序
-        private static void Process_ErrorDataReceived(object sender, DataReceivedEventArgs e)
-        {
-            if (!string.IsNullOrEmpty(e.Data))
-            {
-                Console.WriteLine("命令执行日志: " + e.Data);
-            }
-        }
+
     }
 }

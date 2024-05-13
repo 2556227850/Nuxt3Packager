@@ -8,19 +8,18 @@ namespace Nuxt3Packager
 {
     internal class Detection
     {
-        public Detection()
-        {
-            Console.WriteLine($"检测程序:初始化...");
-        }
+        public string? Message { get; set; } // 提示
+
         public bool DetectionPath(string path) {
+            Console.WriteLine($"{Message}:初始化...");
             // 如果 node_modules 文件夹存在
             if (Directory.Exists(path))
             {
-                Console.WriteLine($"检测程序:检测到文件或目录路径为{path}");
+                Console.WriteLine($"{Message}:检测到文件或文件夹路径为{path}");
                 return true;
             }
 
-            Console.WriteLine($"检测程序:未检测到该文件或目录");
+            Console.WriteLine($"{Message}:未检测到{path}文件或文件夹");
             return false;
         }
     }
