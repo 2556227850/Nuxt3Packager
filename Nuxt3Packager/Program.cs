@@ -11,8 +11,8 @@ class Program
         Console.WriteLine("<=====创建Nuxt3项目打包任务=====>");
         Console.WriteLine("<=====开始任务=====>");
         // 创建指令
-        Cmd YarnPackage = new Cmd { Message = "检测yarn环境程序", Arguments = "/c yar --version" , };
-        Cmd InstallationYarn = new Cmd() { Message = "安装yarn程序", Arguments = "/c np i yarn -g" };
+        Cmd YarnPackage = new Cmd { Message = "检测yarn环境程序", Arguments = "/c yarn --version" , };
+        Cmd InstallationYarn = new Cmd() { Message = "安装yarn程序", Arguments = "/c npm i yarn -g" };
         Cmd InstallationPackage = new Cmd() { Message = "安装项目包程序", Arguments = "/c yarn" };
         Cmd RunBuild = new Cmd() { Message = "打包程序", Arguments = "/c yarn build" };
 
